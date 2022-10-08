@@ -8,6 +8,7 @@ import reactor.core.publisher.Flux;
 public class HelloWorldWebFluxApplication {
 
     public static void main(String[] args) {
+
         Flux<String> dataStream = Flux.just("Java", "C++", "Python", "Ruby");
 
         SpringApplication.run(HelloWorldWebFluxApplication.class, args);
@@ -15,8 +16,6 @@ public class HelloWorldWebFluxApplication {
         dataStream.subscribe(prog ->
         {
             System.out.println("Hello Word "+prog);
-
         });
-
     }
 }
