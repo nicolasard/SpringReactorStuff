@@ -24,6 +24,7 @@ public class HelloWorldController {
                 .buffer(3)
                 .flatMap(Flux::fromIterable)
                 .map(t-> this.printMethod("2: ",t))
+                .log()
                 .subscribe();
         return Mono.just(id);
     }
@@ -33,9 +34,9 @@ public class HelloWorldController {
             final Integer randomeTime = (int) ((Math.random() * (400 - 50)) + 50);
             Thread.sleep(randomeTime); //This is to put some entropy in the "print method process"
         }catch(InterruptedException e){
-            logger.info("Something happened trying to sleep");
+            //logger.info("Something happened trying to sleep");
         }
-        logger.info(prefix+s);
+        //logger.info(prefix+s);
         return s;
     }
 }

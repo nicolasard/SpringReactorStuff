@@ -59,8 +59,8 @@ public class HelloWorldTest {
                 .map(t-> this.printMethod("1: ",t))
                 .buffer(3)
                 .flatMap(Flux::fromIterable)
-                .map(t-> this.printMethod("2: ",t))
-                .doOnError(Exception.class,t->printMethod("4",t.getMessage()))
+                .concatWith(Flux.error(new RuntimeException("Runtime exception ocurred")))
+                .doOnError(Exception.class,t->printMethod("Exception ocurred...",t.getMessage()))
                 .subscribe();
     }
 
@@ -75,4 +75,10 @@ public class HelloWorldTest {
         System.out.println("(Thread name=" + t.getName() + ") -  " + prefix+s);
         return s;
     }
+
+    private static String exceptionRunner(String t) throws Exception {
+        throw new Exception("Buuuu and exception ocurred.");
+    }
+
+
 }
